@@ -38,14 +38,14 @@ The project consists of a **FastAPI** backend with a **React + Vite** frontend, 
 
 | Feature | Description |
 |---|---|
-| 📄 **Resume Parsing** | Extracts skills, experience, education, and contact details from uploaded PDFs |
-| 🔍 **Semantic Search (RAG)** | ChromaDB + Sentence Transformers for deep candidate-to-job matching |
-| 🎙️ **AI Interview Agent** | Adaptive, multi-turn technical and behavioral interviews with live evaluation |
-| 📊 **Decision & Scoring Engine** | Generates detailed hiring recommendations from interview transcripts and scores |
-| 💬 **Engagement Agent** | Automates candidate communication, status updates, and scheduling |
-| 🧠 **Memory Agent** | Retains cross-session candidate state and interview history |
-| 🔐 **JWT Authentication** | Secure role-based access for HR admins and candidates |
-| 📧 **Email Notifications** | SMTP-based email alerts integrated into the engagement workflow |
+|  **Resume Parsing** | Extracts skills, experience, education, and contact details from uploaded PDFs |
+|  **Semantic Search (RAG)** | ChromaDB + Sentence Transformers for deep candidate-to-job matching |
+|  **AI Interview Agent** | Adaptive, multi-turn technical and behavioral interviews with live evaluation |
+|  **Decision & Scoring Engine** | Generates detailed hiring recommendations from interview transcripts and scores |
+|  **Engagement Agent** | Automates candidate communication, status updates, and scheduling |
+|  **Memory Agent** | Retains cross-session candidate state and interview history |
+|  **JWT Authentication** | Secure role-based access for HR admins and candidates |
+|  **Email Notifications** | SMTP-based email alerts integrated into the engagement workflow |
 
 ---
 
@@ -197,7 +197,7 @@ cp .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
-✅ The backend will be running at **`http://localhost:8000`**
+ The backend will be running at **`http://localhost:8000`**
 
 ---
 
@@ -216,7 +216,7 @@ npm install
 npm run dev
 ```
 
-✅ The frontend will be running at **`http://localhost:5173`**
+ The frontend will be running at **`http://localhost:5173`**
 
 ---
 
@@ -230,21 +230,21 @@ cp backend/.env.example backend/.env
 
 | Variable | Required | Description | Example |
 |---|---|---|---|
-| `NEXUS_API_BASE_URL` | ✅ | Base URL for the LLM API | `https://api.openai.com/v1` |
-| `NEXUS_API_KEY` | ✅ | API key for your LLM provider | `sk-...` |
-| `JWT_SECRET_KEY` | ✅ | Secret for signing JWT tokens | `a-long-random-secret` |
-| `JWT_ALGORITHM` | ✅ | JWT signing algorithm | `HS256` |
-| `JWT_ACCESS_TOKEN_EXPIRE_MINUTES` | ✅ | Token expiry (minutes) | `480` |
-| `DATABASE_URL` | ✅ | SQLite async connection string | `sqlite+aiosqlite:///./data/agenthire.db` |
-| `CHROMA_PERSIST_DIR` | ✅ | ChromaDB vector storage path | `./data/chroma_store` |
-| `SMTP_HOST` | ⚠️ Optional | SMTP server host | `smtp.gmail.com` |
-| `SMTP_PORT` | ⚠️ Optional | SMTP port | `587` |
-| `SMTP_USER` | ⚠️ Optional | SMTP username/email | `you@gmail.com` |
-| `SMTP_PASSWORD` | ⚠️ Optional | SMTP password or app password | `your-app-password` |
-| `SENDER_EMAIL` | ⚠️ Optional | Sender email address | `you@gmail.com` |
-| `SENDER_NAME` | ⚠️ Optional | Sender display name | `HireHub Talent Acquisition` |
+| `NEXUS_API_BASE_URL` |  | Base URL for the LLM API | `https://api.openai.com/v1` |
+| `NEXUS_API_KEY` | API key for your LLM provider | `sk-...` |
+| `JWT_SECRET_KEY`| Secret for signing JWT tokens | `a-long-random-secret` |
+| `JWT_ALGORITHM` | JWT signing algorithm | `HS256` |
+| `JWT_ACCESS_TOKEN_EXPIRE_MINUTES` | Token expiry (minutes) | `480` |
+| `DATABASE_URL`| SQLite async connection string | `sqlite+aiosqlite:///./data/agenthire.db` |
+| `CHROMA_PERSIST_DIR` | ChromaDB vector storage path | `./data/chroma_store` |
+| `SMTP_HOST` |  Optional | SMTP server host | `smtp.gmail.com` |
+| `SMTP_PORT` |  Optional | SMTP port | `587` |
+| `SMTP_USER` |  Optional | SMTP username/email | `you@gmail.com` |
+| `SMTP_PASSWORD` |  Optional | SMTP password or app password | `your-app-password` |
+| `SENDER_EMAIL` |  Optional | Sender email address | `you@gmail.com` |
+| `SENDER_NAME` |  Optional | Sender display name | `HireHub Talent Acquisition` |
 
-> **⚠️ Security Note:** Never commit your `.env` file to version control. It is already listed in `.gitignore`.
+> ** Security Note:** Never commit your `.env` file to version control. It is already listed in `.gitignore`.
 
 ---
 

@@ -7,7 +7,6 @@ os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "1"
 import logging
 from typing import List, Dict, Any, Optional
 import fitz  # PyMuPDF
-from sentence_transformers import SentenceTransformer
 import chromadb
 from chromadb.utils import embedding_functions
 
@@ -23,9 +22,10 @@ class RAGEngine:
         self._embedding_model = None
 
     @property
-    def embedding_model(self) -> SentenceTransformer:
+    def embedding_model(self):
         if self._embedding_model is None:
             logger.info("Loading sentence-transformers/all-MiniLM-L6-v2 embedding model...")
+            from sentence_transformers import SentenceTransformer  # lazy import to save startup RAM
             self._embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
         return self._embedding_model
 

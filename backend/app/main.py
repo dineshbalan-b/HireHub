@@ -31,9 +31,16 @@ app = FastAPI(
 )
 
 # CORS middleware
+# Note: allow_credentials=True cannot be used with allow_origins=["*"]
+# So we list allowed origins explicitly
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://hire-hub-sigma-three.vercel.app",
+        "https://*.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

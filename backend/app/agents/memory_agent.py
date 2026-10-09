@@ -1,7 +1,7 @@
 import json
 import logging
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select
 
@@ -67,7 +67,7 @@ class MemoryAgent:
                 existing_is.communication_score = interview_session_data.get("communication_score")
                 existing_is.overall_score = interview_session_data.get("overall_score")
                 existing_is.status = "completed"
-                existing_is.completed_at = datetime.utcnow()
+                existing_is.completed_at = datetime.now(timezone.utc)
                 db_session.add(existing_is)
             else:
                 is_obj = InterviewSession(
@@ -77,7 +77,7 @@ class MemoryAgent:
                     communication_score=interview_session_data.get("communication_score"),
                     overall_score=interview_session_data.get("overall_score"),
                     status="completed",
-                    completed_at=datetime.utcnow()
+                    completed_at=datetime.now(timezone.utc)
                 )
                 db_session.add(is_obj)
 

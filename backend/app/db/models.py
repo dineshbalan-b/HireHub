@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from uuid import uuid4
 from sqlmodel import Field, SQLModel
@@ -7,12 +7,15 @@ import json
 def get_uuid() -> str:
     return uuid4().hex
 
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
+
 class HRUser(SQLModel, table=True):
     hr_id: str = Field(default_factory=get_uuid, primary_key=True)
     name: str
     email: str = Field(unique=True, index=True)
     hashed_password: str
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utcnow)
 
 class HiringDrive(SQLModel, table=True):
     drive_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -24,7 +27,7 @@ class HiringDrive(SQLModel, table=True):
     min_experience: int
     min_cgpa: Optional[float] = None
     constraints: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utcnow)
 
 class KnowledgeDocument(SQLModel, table=True):
     doc_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -32,7 +35,7 @@ class KnowledgeDocument(SQLModel, table=True):
     file_name: str
     doc_type: str
     chroma_collection_id: Optional[str] = None
-    uploaded_at: datetime = Field(default_factory=datetime.utcnow)
+    uploaded_at: datetime = Field(default_factory=utcnow)
 
 class Candidate(SQLModel, table=True):
     candidate_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -44,7 +47,7 @@ class Candidate(SQLModel, table=True):
     github_url: Optional[str] = None
     linkedin_url: Optional[str] = None
     status: str = Field(default="registered")
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utcnow)
 
 class UnifiedProfile(SQLModel, table=True):
     profile_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -53,7 +56,7 @@ class UnifiedProfile(SQLModel, table=True):
     github_metrics: Optional[str] = None
     linkedin_data: Optional[str] = None
     certificates: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utcnow)
 
 class VerifiedSkill(SQLModel, table=True):
     skill_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -73,7 +76,7 @@ class InterviewSession(SQLModel, table=True):
     overall_score: Optional[float] = None
     status: str = Field(default="pending")
     proctoring_logs: Optional[str] = None
-    started_at: datetime = Field(default_factory=datetime.utcnow)
+    started_at: datetime = Field(default_factory=utcnow)
     completed_at: Optional[datetime] = None
 
 class InterviewQA(SQLModel, table=True):
@@ -87,7 +90,7 @@ class InterviewQA(SQLModel, table=True):
     score: Optional[float] = None
     feedback: Optional[str] = None
     skill_targeted: str
-    asked_at: datetime = Field(default_factory=datetime.utcnow)
+    asked_at: datetime = Field(default_factory=utcnow)
 
 class HiringDecision(SQLModel, table=True):
     decision_id: str = Field(default_factory=get_uuid, primary_key=True)
@@ -98,4 +101,4 @@ class HiringDecision(SQLModel, table=True):
     strengths: Optional[str] = None
     weaknesses: Optional[str] = None
     reasoning: str
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=utcnow)

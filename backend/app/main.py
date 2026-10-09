@@ -31,17 +31,22 @@ app = FastAPI(
 )
 
 # CORS middleware
-# Note: allow_credentials=True cannot be used with allow_origins=["*"]
-# So we list allowed origins explicitly
+# ALLOWED_ORIGINS env var: comma-separated list of allowed frontend URLs
+# Example: https://hire-hub-steel-six.vercel.app,https://hire-hub-sigma-three.vercel.app
+_raw_origins = os.environ.get("ALLOWED_ORIGINS", "")
+if _raw_origins:
+    allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+else:
+    # Default: allow all (for local development)
+    allowed_origins = ["*"]
+
+# If using wildcard, credentials must be False (browser security rule)
+allow_creds = allowed_origins != ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "https://hire-hub-sigma-three.vercel.app",
-        "https://*.vercel.app",
-    ],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_creds,
     allow_methods=["*"],
     allow_headers=["*"],
 )
